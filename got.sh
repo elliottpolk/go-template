@@ -18,14 +18,17 @@ read PROJECT
 [ -z "$PROJECT" ] && WARN "Invalid project name" && exit 1
 [ -d "$PROJECT" ] && WARN "Project already exists" && exit 1
 
-PROMPT "Author"
+PROMPT "Author (Elliott Polk)"
 read AUTHOR
+AUTHOR=${AUTHOR:-"Elliott Polk"}
 
-PROMPT "Organization"
+PROMPT "Organization (RocketMopp)"
 read ORG
+ORG=${ORG:-"RocketMopp"}
 
-PROMPT "Repo"
+PROMPT "Repo (github.com/elliottpolk)"
 read REPO
+REPO=${REPO:-"github.com/elliottpolk"}
 
 PROMPT "Initial version (1.0.0)"
 read VERSION
