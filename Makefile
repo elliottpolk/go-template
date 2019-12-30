@@ -23,15 +23,19 @@ unit-test: ; $(info $(M) running unit tests...)                     @ ## run the
 	@go get -v -u
 	@go test -cover ./...
 
+.PHONEY: build-dir
+build-dir: ;
+	@[ ! -d "${BUILD_DIR}" ] && mkdir -vp "${BUILD_DIR}/public" || true
+
 .PHONY: build
 build: build-dir; $(info $(M) building ...)                         @ ## build the binary
 	@GOOS=$(GOOS) go build \
 		-ldflags "-X main.version=$(CLI_VERSION) -X main.compiled=$(date +%s)" \
 		-o ./build/bin/$(BIN) ./cmd/main.go
 
-.PHONEY: build-dir
-build-dir: ;
-	@[ ! -d "${BUILD_DIR}" ] && mkdir -vp "${BUILD_DIR}/public" || true
+.PHONY: install
+install: build-dir; $(info $(M) installing ...)             		@ ## install the binary locally
+	@GOOS=$(GOOS) go build -ldflags "-X main.version=$(VERSION) -X main.compiled=$(date +%s)" -o $(GOPATH)/bin/$(BIN) ./cmd
 
 .PHONY: help
 help:
