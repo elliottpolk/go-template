@@ -1,5 +1,5 @@
 BIN={{ project }}
-PKG=github.com/{{ package }}
+PKG={{ repo }}/{{ project }}
 CLI_VERSION=`cat .version`
 GOOS?=linux
 BUILD_DIR=./build/bin
